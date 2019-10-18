@@ -6,18 +6,10 @@ This is an example implementation of a Pokemon plugin for Nushell in Python.
 I wanted to create this to clearly lay out how someone should provide named
 arguments.
 
+See the asciinema example too:
 
-```
-/code> pokemon --mandatory MANDATORYARG
-/code> cat /tmp/nu_plugin_pokemon.log
-root - INFO - REQUEST {"jsonrpc":"2.0","method":"sink","params":[{"args":{"positional":null,"named":{"mandatory":{"tag":{"anchor":null,"span":{"start":20,"end":32}},"item":{"Primitive":{"String":"MANDATORYARG"}}}}},"name_tag":{"anchor":null,"span":{"start":0,"end":7}}},[]]}
+[![asciicast](https://asciinema.org/a/275414.svg)](https://asciinema.org/a/275414)
 
-root - INFO - METHOD sink
-/code> pokemon --mandatory MANDATORYARG --optional OPTIONALARG --switch
-/code> cat /tmp/nu_plugin_pokemon.log
-root - INFO - REQUEST {"jsonrpc":"2.0","method":"sink","params":[{"args":{"positional":null,"named":{"switch":{"tag":{"anchor":null,"span":{"start":58,"end":64}},"item":{"Primitive":{"Boolean":true}}},"mandatory":{"tag":{"anchor":null,"span":{"start":20,"end":32}},"item":{"Primitive":{"String":"MANDATORYARG"}}},"optional":{"tag":{"anchor":null,"span":{"start":44,"end":55}},"item":{"Primitive":{"String":"OPTIONALARG"}}}}},"name_tag":{"anchor":null,"span":{"start":0,"end":7}}},[]]}
-
-```
 
 ## Build
 
@@ -302,3 +294,23 @@ and see other debugging information (along with our temporary log file).
  TRACE nu::cli > Trying "/usr/local/bin/nu_plugin_pokemon"
  TRACE nu::cli > processing response (717 bytes)
 ```
+
+For those interested in seeing the responses that get shared with the plugin from nu, here are
+a few examples. This was done when I was just developing, and testing named arguments for:
+
+ - mandatory
+ - optional
+ - switch
+
+```
+/code> pokemon --mandatory MANDATORYARG
+/code> cat /tmp/nu_plugin_pokemon.log
+root - INFO - REQUEST {"jsonrpc":"2.0","method":"sink","params":[{"args":{"positional":null,"named":{"mandatory":{"tag":{"anchor":null,"span":{"start":20,"end":32}},"item":{"Primitive":{"String":"MANDATORYARG"}}}}},"name_tag":{"anchor":null,"span":{"start":0,"end":7}}},[]]}
+
+root - INFO - METHOD sink
+/code> pokemon --mandatory MANDATORYARG --optional OPTIONALARG --switch
+/code> cat /tmp/nu_plugin_pokemon.log
+root - INFO - REQUEST {"jsonrpc":"2.0","method":"sink","params":[{"args":{"positional":null,"named":{"switch":{"tag":{"anchor":null,"span":{"start":58,"end":64}},"item":{"Primitive":{"Boolean":true}}},"mandatory":{"tag":{"anchor":null,"span":{"start":20,"end":32}},"item":{"Primitive":{"String":"MANDATORYARG"}}},"optional":{"tag":{"anchor":null,"span":{"start":44,"end":55}},"item":{"Primitive":{"String":"OPTIONALARG"}}}}},"name_tag":{"anchor":null,"span":{"start":0,"end":7}}},[]]}
+```
+
+I hope it helps someone!

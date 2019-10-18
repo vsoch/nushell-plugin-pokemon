@@ -93,6 +93,7 @@ def get_config():
           "pokemon": {"Optional": "String"},
           "catch": "Switch",
           "help": "Switch",
+          "list": "Switch",
           "list-sorted": "Switch",
           "help": "Switch"
       },
